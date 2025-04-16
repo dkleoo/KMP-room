@@ -218,6 +218,14 @@ fun ProductsScreen() {
                                 updateProducts
                             )
                             updateProducts = null
+                            nameProducts = ""
+                            descriptionProducts = ""
+                            barcodeProducts = ""
+                            costProducts = ""
+                            priceProducts = ""
+                            earings = ""
+                            value = ""
+
                         },
                         content = {
                             Text(if(updateProducts == null) "Guardar" else "Actualizar")

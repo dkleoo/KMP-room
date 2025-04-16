@@ -11,9 +11,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.OutlinedTextField
@@ -31,6 +34,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import org.example.project.database.products.Products
+import org.example.project.database.sales_details.SalesDetails
 import org.example.project.formatPrice
 import org.jetbrains.compose.resources.painterResource
 import org.koin.compose.viewmodel.koinViewModel
@@ -41,7 +45,7 @@ import tiendagaby2.composeapp.generated.resources.ic_placeholder
 fun SalesScreen() {
 
     val viewModel: SalesViewModel = koinViewModel()
-    var addProducts by remember { mutableStateOf<Products?>(null) }
+    var lstSalesDetails by remember { mutableStateOf<ArrayList<SalesDetails>>(arrayListOf()) }
 
     LaunchedEffect(Unit) {
         viewModel.getProducts()
@@ -82,7 +86,7 @@ fun SalesScreen() {
                             Column (
                                 modifier = Modifier.fillMaxSize().padding(16.dp)
                                     .clickable {
-                                        addProducts = products
+                                        lstSalesDetails = arrayListOf(SalesDetails(idProduct = products.id, price = products.price, quantity = 1))
                                     },
                                 horizontalAlignment = Alignment.CenterHorizontally
                             ) {
@@ -113,7 +117,39 @@ fun SalesScreen() {
                 .fillMaxHeight(),
             contentAlignment = Alignment.Center
         ) {
-            Text("Zona Azul", color = Color.White)
+            Card (
+                modifier = Modifier.padding(16.dp).fillMaxSize(),
+                shape = RoundedCornerShape(16.dp),
+                elevation = 0.dp
+            ) {
+                Column {
+                    LazyColumn {
+                        items(lstSalesDetails) { details ->
+                            Card (
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(150.dp)
+                                    .padding(vertical = 16.dp, horizontal = 8.dp),
+                                shape = RoundedCornerShape(16.dp),
+                                elevation = 8.dp
+                            ) {
+                                Row (
+                                    modifier = Modifier.fillMaxWidth(),
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Image(
+                                        painter = painterResource(Res.drawable.ic_placeholder),
+                                        contentDescription = null,
+                                        modifier = Modifier.size(100.dp)
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
+
+
