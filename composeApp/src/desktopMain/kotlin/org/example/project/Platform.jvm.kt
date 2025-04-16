@@ -18,3 +18,12 @@ actual fun getDatabaseBuilder(): RoomDatabase.Builder<AppDatabase> {
         name = dbFile.absolutePath,
     )
 }
+
+// desktopMain
+actual fun formatPrice(price: Double): String {
+    val formatter = java.text.NumberFormat.getCurrencyInstance(java.util.Locale("en", "US")).apply {
+        maximumFractionDigits = if (price % 1 == 0.0) 0 else 2
+    }
+    return formatter.format(price)
+}
+

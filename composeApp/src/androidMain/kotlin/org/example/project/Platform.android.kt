@@ -29,3 +29,7 @@ actual fun getDatabaseBuilder(): RoomDatabase.Builder<AppDatabase> {
 }
 
 
+actual fun formatPrice(price: Double): String {
+    val formatter = java.text.NumberFormat.getCurrencyInstance(java.util.Locale("en", "US"))
+    return formatter.format(price)
+}
