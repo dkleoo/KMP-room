@@ -18,7 +18,6 @@ import org.koin.core.module.Module
 
 expect val platformModule: Module
 
-//fun getKoinModules() = listOf(moduleDatabase, moduleApp,platformModule)
 
 val appDao: Module = module {
     single <AppDao> { AppDao(customerDao = get()) }
@@ -33,6 +32,8 @@ val dataBaseModule : Module = module {
     }
     single { get<AppDatabase>().customerDao() }
     single { get<AppDatabase>().productsDao() }
+    single { get<AppDatabase>().salesDao() }
+    single { get<AppDatabase>().salesDetailsDao() }
 }
 
 val moduleApp = module {

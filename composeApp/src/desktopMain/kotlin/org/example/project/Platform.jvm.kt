@@ -5,6 +5,8 @@ import androidx.room.RoomDatabase
 import org.example.project.database.AppDatabase
 import org.example.project.database.DATABASE_NAME
 import java.io.File
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class JVMPlatform: Platform {
     override val name: String = "Java ${System.getProperty("java.version")}"
@@ -27,3 +29,9 @@ actual fun formatPrice(price: Double): String {
     return formatter.format(price)
 }
 
+
+actual fun getCurrentTime(): String {
+    val current = LocalDateTime.now()
+    val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")
+    return current.format(formatter)
+}

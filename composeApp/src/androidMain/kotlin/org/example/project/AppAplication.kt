@@ -2,7 +2,6 @@ package org.example.project
 
 import android.app.Application
 import android.content.Context
-import org.example.project.di.getKoinModules
 import org.example.project.di.initKoin
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -22,6 +21,6 @@ class AppAplication : Application() {
 fun initKoinAndroid(context: Context) {
     startKoin {
         provideAndroidContext(context)
-        modules(getKoinModules())
+        modules()
     }
 }

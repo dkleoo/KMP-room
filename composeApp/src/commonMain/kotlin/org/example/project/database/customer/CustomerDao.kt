@@ -11,6 +11,6 @@ interface CustomerDao {
     suspend fun saveCustomer(customers: Customers)
 
     @Query("SELECT * FROM Customers")
-    suspend fun getCustomer(): Customers
+    suspend fun getCustomer(): List<Customers>
 
 }

@@ -22,6 +22,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -32,10 +33,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.dp
 import org.example.project.database.DATABASE_NAME
+import org.example.project.ui.customer.CustomerScreen
+import org.example.project.ui.customer.CustomerViewModel
 import org.example.project.ui.productos.ProductsScreen
 import org.example.project.ui.ventas.SalesScreen
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.koin.compose.viewmodel.koinViewModel
 import tiendagaby2.composeapp.generated.resources.Res
 import tiendagaby2.composeapp.generated.resources.ic_clientes
 import tiendagaby2.composeapp.generated.resources.ic_productos
@@ -55,12 +59,17 @@ fun SideDrawerWithIconsAndText() {
     var isExpanded by remember { mutableStateOf(true) }
     var selectIcon by remember { mutableStateOf<DrawerItem?>(null) }
 
+    val viewModel: CustomerViewModel = koinViewModel()
+
+    LaunchedEffect(Unit) {
+        viewModel.saveCustomer()
+    }
+
     val drawerItems = listOf(
         DrawerItem("Ventas", painterResource(Res.drawable.ic_ventas)),
         DrawerItem("Productos", painterResource(Res.drawable.ic_productos)),
         DrawerItem("Clientes", painterResource(Res.drawable.ic_clientes)),
     )
-
 
     Row(Modifier.fillMaxSize()) {
         Surface(
@@ -113,6 +122,7 @@ fun SideDrawerWithIconsAndText() {
             when (selectIcon?.title) {
                 "Ventas" -> SalesScreen()
                 "Productos" -> ProductsScreen()
+                "Clientes" -> CustomerScreen()
                 else -> SalesScreen()
             }
         }

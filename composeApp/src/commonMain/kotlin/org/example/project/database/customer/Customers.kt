@@ -17,7 +17,7 @@ data class Customers(
 fun Customers.customerFast(): Customers {
     return Customers(
         id = 0,
-        nameCustomer = "Cliente",
+        nameCustomer = "Cliente Rapido",
         lastNameCustomer = "Rapido",
         phone = "22222222",
         email = "clienterapido@gmail.com",

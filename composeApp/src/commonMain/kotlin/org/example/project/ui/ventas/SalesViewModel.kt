@@ -8,6 +8,8 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.example.project.database.products.Products
+import org.example.project.database.sales.Sales
+import org.example.project.database.sales_details.SalesDetails
 
 class SalesViewModel(private val repository: SalesRepository) : ViewModel() {
 
@@ -16,6 +18,12 @@ class SalesViewModel(private val repository: SalesRepository) : ViewModel() {
     fun getProducts() {
         viewModelScope.launch(Dispatchers.IO) {
             products = repository.getProducts()
+        }
+    }
+
+    fun saveSales(sales: Sales, lstSalesDetails: ArrayList<SalesDetails>) {
+        viewModelScope.launch {
+            repository.saveSales(sales,lstSalesDetails)
         }
     }
 

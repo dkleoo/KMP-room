@@ -13,4 +13,6 @@ expect fun getDatabaseBuilder() : RoomDatabase.Builder<AppDatabase>
 
 expect fun formatPrice(price: Double): String
 
+expect fun getCurrentTime(): String
+
 

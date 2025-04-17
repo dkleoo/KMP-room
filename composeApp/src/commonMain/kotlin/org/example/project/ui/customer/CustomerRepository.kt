@@ -6,14 +6,23 @@ import org.example.project.database.customer.customerFast
 
 class CustomerRepository(private val customerDao: CustomerDao) {
 
-    suspend fun saveCustomer(): String {
+    suspend fun saveCustomer() {
         try {
-           val customers = Customers()
-            customerDao.saveCustomer(customers.customerFast())
-            return customerDao.getCustomer().nameCustomer
+            val customersList = getCustomer()
+            if (customersList.isEmpty()) {
+                val customers = Customers()
+                customerDao.saveCustomer(customers.customerFast())
+            }
         } catch (e:Exception) {
             e.cause
-            return ""
+        }
+    }
+
+    suspend fun getCustomer(): List<Customers> {
+        return try {
+            customerDao.getCustomer()
+        } catch (e:Exception) {
+            listOf()
         }
     }
 

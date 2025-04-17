@@ -100,7 +100,7 @@ fun ProductsScreen() {
                                 )
                                 Text(
                                     products.nameProduct,
-                                    modifier = Modifier.weight(0.5f),
+                                    modifier = Modifier.weight(0.9f),
                                     fontWeight = FontWeight.Bold
                                 )
                                 Text(
@@ -170,7 +170,8 @@ fun ProductsScreen() {
                         value = barcodeProducts,
                         onValueChange = { barcodeProducts = it },
                         label = { Text("Codigo de barras") },
-                        modifier = Modifier.padding(8.dp).fillMaxWidth()
+                        modifier = Modifier.padding(8.dp).fillMaxWidth(),
+                        maxLines = 1
                     )
                     OutlinedTextField(
                         value = costProducts,
