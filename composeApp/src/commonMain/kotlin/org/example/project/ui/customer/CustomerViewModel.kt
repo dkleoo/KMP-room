@@ -9,11 +9,13 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.example.project.database.customer.Customers
+import org.example.project.database.sales.SalesByDate
+import org.example.project.database.sales.SalesReport
 
 class CustomerViewModel(private val repository: CustomerRepository): ViewModel() {
 
     var nameCustomer by mutableStateOf("")
-    var lstCustomer by mutableStateOf<List<Customers>>(listOf())
+    var lstSalesReport by mutableStateOf<List<SalesByDate>>(arrayListOf())
 
 
     fun saveCustomer() {
@@ -22,9 +24,9 @@ class CustomerViewModel(private val repository: CustomerRepository): ViewModel()
         }
     }
 
-    fun getCustomer() {
+    fun totSales() {
         viewModelScope.launch (Dispatchers.IO) {
-            lstCustomer = repository.getCustomer()
+            lstSalesReport = repository.totSalesGroupedByDate()
         }
     }
 

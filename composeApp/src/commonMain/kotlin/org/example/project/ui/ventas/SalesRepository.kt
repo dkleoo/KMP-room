@@ -19,9 +19,9 @@ class SalesRepository(private val productsDao: ProductsDao,private val salesDao:
 
     suspend fun saveSales(sales: Sales, lstSalesDetails: ArrayList<SalesDetails>) {
         try {
-            salesDao.saveSales(sales)
+            val id = salesDao.saveSales(sales)
             lstSalesDetails.forEach {
-                it.idSales = sales.id
+                it.idSales = id.toInt()
                 salesDetailsDao.saveDetails(it)
             }
         } catch (e:Exception) {

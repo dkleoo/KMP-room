@@ -204,7 +204,7 @@ fun SalesScreen() {
                             Card (
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .height(150.dp)
+                                    .height(130.dp)
                                     .padding(16.dp),
                                 shape = RoundedCornerShape(16.dp),
                                 elevation = 8.dp
@@ -240,13 +240,13 @@ fun SalesScreen() {
                                             details.nameProducts,
                                             fontWeight = FontWeight.Bold,
                                             textAlign = TextAlign.Center,
-                                            modifier = Modifier.weight(1.5f).fillMaxWidth()
+                                            modifier = Modifier.weight(3f).fillMaxWidth()
                                         )
                                         Text(
                                             formatPrice(details.price),
                                             fontWeight = FontWeight.Bold,
                                             textAlign = TextAlign.Center,
-                                            modifier = Modifier.weight(1.5f).fillMaxWidth()
+                                            modifier = Modifier.weight(3f).fillMaxWidth()
                                         )
                                         Row (
                                             modifier = Modifier.weight(2f),
@@ -294,14 +294,14 @@ fun SalesScreen() {
                         }
                     }
                     Divider()
-                    Column (modifier = Modifier.weight(0.6f)) {
+                    Column (modifier = Modifier.weight(1f)) {
                         LazyRow (modifier = Modifier.weight(2.5f)) {
                             items(prices) { prices ->
                                 Card (
                                     backgroundColor = Color(0xFF008000),
                                     elevation = 8.dp,
                                     shape = RoundedCornerShape(8.dp),
-                                    modifier = Modifier.padding(8.dp)
+                                    modifier = Modifier.padding(4.dp)
                                         .clickable {
                                             valueReceived += prices
                                             focusRequester.requestFocus()
@@ -310,8 +310,8 @@ fun SalesScreen() {
                                     Text(
                                         formatPrice(prices),
                                         fontWeight = FontWeight.Bold,
-                                        fontSize = 22.sp,
-                                        modifier = Modifier.padding(16.dp)
+                                        fontSize = 17.sp,
+                                        modifier = Modifier.padding(8.dp)
                                     )
                                 }
                             }
@@ -324,33 +324,33 @@ fun SalesScreen() {
                                 Image(
                                     painter = painterResource(Res.drawable.mas),
                                     contentDescription = null,
-                                    modifier = Modifier.size(35.dp).clickable {
+                                    modifier = Modifier.size(28.dp).clickable {
                                         valueReceived += valueReceivedAdd.toDouble()
                                         valueReceivedAdd = ""
                                         focusRequester.requestFocus()
                                     }
                                 )
                             },
-                            modifier = Modifier.fillMaxWidth().weight(2.5f)
+                            modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp).weight(3.5f)
                         )
-                        Row (modifier = Modifier.weight(3f)) {
+                        Row (modifier = Modifier.weight(4f)) {
                             Column (modifier = Modifier.weight(1f)) {
                                 Text(
                                     "Valor recibido: ${formatPrice(valueReceived)}",
                                     modifier = Modifier.padding(top = 8.dp).weight(1f),
-                                    fontSize = 20.sp,
+                                    fontSize = 17.sp,
                                     fontWeight = FontWeight.Bold,
                                 )
                                 Text(
                                     "Total de venta: ${formatPrice(lstSalesDetails.sumOf { it.price * it.quantity })}",
                                     modifier = Modifier.padding(top = 8.dp).weight(1f),
-                                    fontSize = 20.sp,
+                                    fontSize = 17.sp,
                                     fontWeight = FontWeight.Bold
                                 )
                                 Text(
                                     "Cambio: ${formatPrice(if(valueReceived != 0.0 && lstSalesDetails.isNotEmpty()) valueReceived - lstSalesDetails.sumOf { it.price * it.quantity } else 0.0)}",
                                     modifier = Modifier.padding(top = 8.dp).weight(1f),
-                                    fontSize = 20.sp,
+                                    fontSize = 17.sp,
                                     fontWeight = FontWeight.Bold
                                 )
                             }

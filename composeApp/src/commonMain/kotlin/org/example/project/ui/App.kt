@@ -68,7 +68,7 @@ fun SideDrawerWithIconsAndText() {
     val drawerItems = listOf(
         DrawerItem("Ventas", painterResource(Res.drawable.ic_ventas)),
         DrawerItem("Productos", painterResource(Res.drawable.ic_productos)),
-        DrawerItem("Clientes", painterResource(Res.drawable.ic_clientes)),
+        DrawerItem("Reportes", painterResource(Res.drawable.ic_clientes)),
     )
 
     Row(Modifier.fillMaxSize()) {
@@ -122,7 +122,7 @@ fun SideDrawerWithIconsAndText() {
             when (selectIcon?.title) {
                 "Ventas" -> SalesScreen()
                 "Productos" -> ProductsScreen()
-                "Clientes" -> CustomerScreen()
+                "Reportes" -> CustomerScreen()
                 else -> SalesScreen()
             }
         }
